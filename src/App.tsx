@@ -46,7 +46,7 @@ function App() {
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-2">
-            Which costume should Matteo wear?
+            Which costume will Matteo wear?
           </h1>
           <p className="text-lg text-gray-600">
             {hasVoted ? 'Thanks for voting! See the results below' : 'Vote for your favorite or add your own'}
