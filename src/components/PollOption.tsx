@@ -12,7 +12,7 @@ export const PollOption = ({ option, onVote, totalVotes }: PollOptionProps) => {
   return (
     <button
       onClick={() => onVote(option.id)}
-      className="relative w-full min-h-[60px] px-6 py-4 bg-white hover:bg-gray-300 text-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95 touch-manipulation overflow-hidden"
+      className="relative w-full min-h-[60px] px-6 py-4 bg-gray-300 hover:bg-gray-400 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95 touch-manipulation overflow-hidden"
     >
       {/* Background bar that fills based on percentage */}
       <div
@@ -22,10 +22,10 @@ export const PollOption = ({ option, onVote, totalVotes }: PollOptionProps) => {
 
       {/* Content overlay */}
       <div className="relative z-10 flex justify-between items-center">
-        <span className="text-lg font-semibold">{option.text}</span>
+        <span className="text-lg font-semibold drop-shadow-md">{option.text}</span>
         <div className="flex items-center gap-3">
-          <span className="text-sm font-medium">{percentage}%</span>
-          <span className="text-sm font-medium bg-black/20 px-3 py-1 rounded-full">
+          <span className="text-sm font-medium drop-shadow-md">{percentage}%</span>
+          <span className="text-sm font-medium bg-black/30 px-3 py-1 rounded-full drop-shadow-sm">
             ({option.votes} vote{option.votes > 1 ? "s" : ""})
           </span>
         </div>
