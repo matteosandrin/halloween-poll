@@ -9,7 +9,6 @@ interface PollOptionProps {
 }
 
 export const PollOption = ({ option, onVote, totalVotes, maxVote, disabled = false }: PollOptionProps) => {
-  const percentage = totalVotes > 0 ? Math.round((option.votes / totalVotes) * 100) : 0;
   const widthPercentage = totalVotes > 0 ? Math.round((option.votes / maxVote) * 100) : 0;
 
   return (
