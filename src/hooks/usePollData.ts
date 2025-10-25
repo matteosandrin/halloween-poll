@@ -10,10 +10,6 @@ export const usePollData = () => {
   const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
-    // Check if user has already voted
-    const voted = localStorage.getItem('hasVoted') === 'true';
-    setHasVoted(voted);
-
     const unsubscribe = onSnapshot(
       collection(db, 'poll-options'),
       (snapshot) => {
@@ -47,8 +43,7 @@ export const usePollData = () => {
         votes: increment(1),
       });
 
-      // Mark user as having voted
-      localStorage.setItem('hasVoted', 'true');
+      // Mark user as having voted (in-memory only)
       setHasVoted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to vote');
@@ -94,7 +89,6 @@ export const usePollData = () => {
   };
 
   const resetHasVoted = async () => {
-    localStorage.removeItem('hasVoted');
     setHasVoted(false);
   }
 
