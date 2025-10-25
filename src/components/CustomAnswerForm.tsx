@@ -41,7 +41,7 @@ export const CustomAnswerForm = ({ onAdd }: CustomAnswerFormProps) => {
             setError(null);
           }}
           placeholder="Add your own answer..."
-          className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 text-gray-900 placeholder-gray-500 min-h-[48px] touch-manipulation"
+          className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-900 placeholder-gray-500 min-h-[48px] touch-manipulation"
           disabled={isSubmitting}
           maxLength={50}
         />

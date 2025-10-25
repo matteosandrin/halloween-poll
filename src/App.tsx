@@ -22,8 +22,8 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center p-4">
-        <div className="text-2xl font-bold text-purple-600 animate-pulse">
+      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center p-4">
+        <div className="text-2xl font-bold text-blue-600 animate-pulse">
           Loading...
         </div>
       </div>
@@ -32,7 +32,7 @@ function App() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center p-4">
         <div className="bg-red-100 border-2 border-red-400 text-red-700 px-6 py-4 rounded-lg max-w-md">
           <h2 className="font-bold text-lg mb-2">Error</h2>
           <p>{error}</p>
@@ -43,7 +43,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-100 to-pink-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-cyan-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Header */}
         <div className="text-center space-y-2">

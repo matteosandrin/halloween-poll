@@ -16,7 +16,7 @@ export const PollOption = ({ option, onVote, totalVotes }: PollOptionProps) => {
     >
       {/* Background bar that fills based on percentage */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out rounded-lg"
+        className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-500 ease-out rounded-lg"
         style={{ width: `${percentage}%` }}
       />
 
