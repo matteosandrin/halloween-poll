@@ -26,7 +26,7 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-blue-100 flex items-center justify-center p-4">
         <div className="text-2xl font-bold text-blue-600 animate-pulse">
           Loading...
         </div>
@@ -35,7 +35,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-cyan-100 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-blue-100 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Error notification */}
         {error && (
