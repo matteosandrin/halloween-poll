@@ -55,7 +55,7 @@ export const usePollData = () => {
 
       await addDoc(collection(db, 'poll-options'), {
         text,
-        votes: 0,
+        votes: 1, // by default it adds one vote
       });
     } catch (err) {
       throw err;
