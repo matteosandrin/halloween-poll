@@ -87,14 +87,16 @@ export const usePollData = () => {
       );
 
       await Promise.all(deletePromises);
-
-      // Also clear the user's vote status
-      localStorage.removeItem('hasVoted');
-      setHasVoted(false);
+      await resetHasVoted();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to reset poll');
     }
   };
 
-  return { options, loading, error, vote, addCustomOption, resetAllVotes, hasVoted };
+  const resetHasVoted = async () => {
+    localStorage.removeItem('hasVoted');
+    setHasVoted(false);
+  }
+
+  return { options, loading, error, vote, addCustomOption, resetAllVotes, hasVoted, resetHasVoted };
 };

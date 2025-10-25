@@ -4,7 +4,7 @@ import { PollOption } from './components/PollOption';
 import { CustomAnswerForm } from './components/CustomAnswerForm';
 
 function App() {
-  const { options, loading, error, vote, addCustomOption, resetAllVotes, hasVoted } = usePollData();
+  const { options, loading, error, vote, addCustomOption, resetAllVotes, hasVoted, resetHasVoted } = usePollData();
 
   const totalVotes = options.reduce((sum, option) => sum + option.votes, 0);
   const maxVote = options.reduce((currMax, option) => option.votes > currMax ? option.votes : currMax, 0);
@@ -14,9 +14,12 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     const resetKey = params.get('reset');
 
-    if (resetKey) {
+    if (resetKey === 'all') {
       resetAllVotes();
       // Remove the parameter from URL after reset
+      window.history.replaceState({}, '', window.location.pathname);
+    } else if (resetKey === 'vote') {
+      resetHasVoted();
       window.history.replaceState({}, '', window.location.pathname);
     }
   }, [resetAllVotes]);
@@ -48,23 +51,25 @@ function App() {
           <p className="text-lg text-gray-600">
             {hasVoted ? 'Thanks for voting! See the results below' : 'Vote for your favorite or add your own'}
           </p>
-          {hasVoted && (
-            <div className="text-sm text-blue-600 font-semibold bg-white/50 px-4 py-2 rounded-lg inline-block">
-              ✓ You have already voted
-            </div>
-          )}
         </div>
 
         {/* Custom Answer Form */}
-        <div className="bg-white/50 rounded-lg p-4 shadow-lg">
-          <CustomAnswerForm onAdd={addCustomOption} />
-        </div>
+        {!hasVoted && (
+          <div className="bg-white/50 rounded-lg p-4 shadow-lg">
+            <CustomAnswerForm onAdd={addCustomOption} />
+          </div>
+        )}
 
         {/* Poll Options */}
         <div className="space-y-4">
           <div className="text-xl text-center font-bold">
             Total Votes: {totalVotes}
           </div>
+          {hasVoted && (
+            <div className="text-sm text-blue-600 font-semibold bg-white/50 px-4 py-2 rounded-lg mx-auto w-fit">
+              ✓ You have already voted
+            </div>
+          )}
           <div className="space-y-3">
             {options.map((option) => (
               <PollOption
