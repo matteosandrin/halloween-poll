@@ -68,11 +68,6 @@ function App() {
 
         {/* Vote Chart */}
         <VoteChart options={options} />
-
-        {/* Footer */}
-        <div className="text-center text-gray-600 text-sm">
-          <p>Built with React, TypeScript, Tailwind CSS, and Firebase</p>
-        </div>
       </div>
     </div>
   );

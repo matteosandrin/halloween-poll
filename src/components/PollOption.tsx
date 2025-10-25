@@ -17,10 +17,10 @@ export const PollOption = ({ option, onVote, totalVotes }: PollOptionProps) => {
       <div className="flex justify-between items-center">
         <span className="text-lg font-semibold">{option.text}</span>
         <div className="flex items-center gap-3">
-          <span className="text-sm font-medium bg-white/20 px-3 py-1 rounded-full">
-            {option.votes}
-          </span>
           <span className="text-sm font-medium">{percentage}%</span>
+          <span className="text-sm font-medium bg-white/20 px-3 py-1 rounded-full">
+            ({option.votes} vote{option.votes > 1 ? "s"  : ""})
+          </span>
         </div>
       </div>
     </button>
