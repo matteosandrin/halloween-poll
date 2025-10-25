@@ -1,12 +1,24 @@
+import { useEffect } from 'react';
 import { usePollData } from './hooks/usePollData';
 import { PollOption } from './components/PollOption';
 import { CustomAnswerForm } from './components/CustomAnswerForm';
-import { VoteChart } from './components/VoteChart';
 
 function App() {
-  const { options, loading, error, vote, addCustomOption } = usePollData();
+  const { options, loading, error, vote, addCustomOption, resetAllVotes } = usePollData();
 
   const totalVotes = options.reduce((sum, option) => sum + option.votes, 0);
+
+  // Secret endpoint to reset all votes
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const resetKey = params.get('reset');
+
+    if (resetKey) {
+      resetAllVotes();
+      // Remove the parameter from URL after reset
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, [resetAllVotes]);
 
   if (loading) {
     return (
@@ -36,14 +48,19 @@ function App() {
         {/* Header */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-2">
-            Which Fruit is Best?
+            Which costume should Matteo wear?
           </h1>
           <p className="text-lg text-gray-600">
-            Vote for your favorite or add your own!
+            Vote for your favorite or add your own
           </p>
           <div className="text-sm text-gray-500 font-medium">
             Total Votes: {totalVotes}
           </div>
+        </div>
+
+        {/* Custom Answer Form */}
+        <div className="bg-white/50 rounded-lg p-4 shadow-lg">
+          <CustomAnswerForm onAdd={addCustomOption} />
         </div>
 
         {/* Poll Options */}
@@ -57,17 +74,6 @@ function App() {
             />
           ))}
         </div>
-
-        {/* Custom Answer Form */}
-        <div className="bg-white/50 backdrop-blur-sm rounded-lg p-6 shadow-lg">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
-            Don't see your favorite? Add it!
-          </h2>
-          <CustomAnswerForm onAdd={addCustomOption} />
-        </div>
-
-        {/* Vote Chart */}
-        <VoteChart options={options} />
       </div>
     </div>
   );

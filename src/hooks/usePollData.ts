@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { collection, onSnapshot, doc, updateDoc, increment, addDoc, query, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot, doc, updateDoc, increment, addDoc, query, getDocs, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase/config';
 import type { PollOption } from '../types';
 
@@ -62,5 +62,20 @@ export const usePollData = () => {
     }
   };
 
-  return { options, loading, error, vote, addCustomOption };
+  const resetAllVotes = async () => {
+    try {
+      const q = query(collection(db, 'poll-options'));
+      const snapshot = await getDocs(q);
+
+      const deletePromises = snapshot.docs.map((docSnapshot) =>
+        deleteDoc(doc(db, 'poll-options', docSnapshot.id))
+      );
+
+      await Promise.all(deletePromises);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to reset poll');
+    }
+  };
+
+  return { options, loading, error, vote, addCustomOption, resetAllVotes };
 };

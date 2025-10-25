@@ -12,14 +12,21 @@ export const PollOption = ({ option, onVote, totalVotes }: PollOptionProps) => {
   return (
     <button
       onClick={() => onVote(option.id)}
-      className="w-full min-h-[60px] px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95 touch-manipulation"
+      className="relative w-full min-h-[60px] px-6 py-4 bg-white hover:bg-gray-300 text-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 active:scale-95 touch-manipulation overflow-hidden"
     >
-      <div className="flex justify-between items-center">
+      {/* Background bar that fills based on percentage */}
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-500 ease-out rounded-lg"
+        style={{ width: `${percentage}%` }}
+      />
+
+      {/* Content overlay */}
+      <div className="relative z-10 flex justify-between items-center">
         <span className="text-lg font-semibold">{option.text}</span>
         <div className="flex items-center gap-3">
           <span className="text-sm font-medium">{percentage}%</span>
-          <span className="text-sm font-medium bg-white/20 px-3 py-1 rounded-full">
-            ({option.votes} vote{option.votes > 1 ? "s"  : ""})
+          <span className="text-sm font-medium bg-black/20 px-3 py-1 rounded-full">
+            ({option.votes} vote{option.votes > 1 ? "s" : ""})
           </span>
         </div>
       </div>

@@ -22,12 +22,12 @@ export const VoteChart = ({ options }: VoteChartProps) => {
   }
 
   return (
-    <div className="w-full bg-white rounded-lg p-4 shadow-lg">
+    <div className="w-full bg-white/50 rounded-lg p-4 shadow-lg">
       <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
-        Vote Results
+        Results
       </h3>
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data} margin={{ top: 20, right: 20, left: 0, bottom: 40 }}>
+        <BarChart data={data} margin={{ top: 20, right: 20, left: 0, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
             dataKey="name"
