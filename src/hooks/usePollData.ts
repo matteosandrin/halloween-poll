@@ -7,8 +7,13 @@ export const usePollData = () => {
   const [options, setOptions] = useState<PollOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [hasVoted, setHasVoted] = useState(false);
 
   useEffect(() => {
+    // Check if user has already voted
+    const voted = localStorage.getItem('hasVoted') === 'true';
+    setHasVoted(voted);
+
     const unsubscribe = onSnapshot(
       collection(db, 'poll-options'),
       (snapshot) => {
@@ -30,11 +35,21 @@ export const usePollData = () => {
   }, []);
 
   const vote = async (optionId: string) => {
+    // Check if user has already voted
+    if (hasVoted) {
+      setError('You have already voted!');
+      return;
+    }
+
     try {
       const optionRef = doc(db, 'poll-options', optionId);
       await updateDoc(optionRef, {
         votes: increment(1),
       });
+
+      // Mark user as having voted
+      localStorage.setItem('hasVoted', 'true');
+      setHasVoted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to vote');
     }
@@ -55,7 +70,7 @@ export const usePollData = () => {
 
       await addDoc(collection(db, 'poll-options'), {
         text,
-        votes: 1, // by default it adds one vote
+        votes: 0,
       });
     } catch (err) {
       throw err;
@@ -72,10 +87,14 @@ export const usePollData = () => {
       );
 
       await Promise.all(deletePromises);
+
+      // Also clear the user's vote status
+      localStorage.removeItem('hasVoted');
+      setHasVoted(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to reset poll');
     }
   };
 
-  return { options, loading, error, vote, addCustomOption, resetAllVotes };
+  return { options, loading, error, vote, addCustomOption, resetAllVotes, hasVoted };
 };
