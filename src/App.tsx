@@ -5,7 +5,7 @@ import { PollOption } from './components/PollOption';
 import { CustomAnswerForm } from './components/CustomAnswerForm';
 
 function App() {
-  const { user, loading: authLoading } = useAuth();
+  const { loading: authLoading } = useAuth();
   const { options, loading, error, vote, addCustomOption, resetAllVotes, hasVoted, resetHasVoted } = usePollData();
 
   const totalVotes = options.reduce((sum, option) => sum + option.votes, 0);
