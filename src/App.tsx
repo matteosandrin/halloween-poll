@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
+import { useAuth } from './hooks/useAuth';
 import { usePollData } from './hooks/usePollData';
 import { PollOption } from './components/PollOption';
 import { CustomAnswerForm } from './components/CustomAnswerForm';
 
 function App() {
+  const { user, loading: authLoading } = useAuth();
   const { options, loading, error, vote, addCustomOption, resetAllVotes, hasVoted, resetHasVoted } = usePollData();
 
   const totalVotes = options.reduce((sum, option) => sum + option.votes, 0);
@@ -24,7 +26,7 @@ function App() {
     }
   }, [resetAllVotes]);
 
-  if (loading) {
+  if (loading || authLoading) {
     return (
       <div className="min-h-screen bg-blue-100 flex items-center justify-center p-4">
         <div className="text-2xl font-bold text-blue-600 animate-pulse">
