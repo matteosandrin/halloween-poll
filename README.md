@@ -1,4 +1,4 @@
-# Fruit Poll App
+# Halloween Poll App
 
 A real-time polling web application built with React, TypeScript, Tailwind CSS, and Firebase.
 
